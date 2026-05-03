@@ -1,0 +1,90 @@
+# Research Paper RAG Assistant
+
+An AI-powered research assistant that lets you upload multiple research papers (PDFs) and ask questions across all of them. Built with LangChain, Groq (LLaMA 3.3 70B), ChromaDB, and Streamlit.
+
+---
+
+## Screenshot
+
+<!-- Add screenshot here after deployment -->
+
+---
+
+## How It Works
+
+```
+Upload PDFs → Chunk text → Embed with HuggingFace → Store in ChromaDB
+                                                              ↓
+                                          Ask a question → Retrieve relevant chunks
+                                                              ↓
+                                                    Groq LLaMA answers with sources
+```
+
+## Features
+
+- Upload one or multiple research papers at once
+- Ask natural language questions across all uploaded papers
+- Answers include which paper(s) the information came from
+- Chat history persists within the session
+- Completely free to use — no paid APIs
+
+## Tech Stack
+
+| Layer | Tool |
+|---|---|
+| LLM | Groq (LLaMA 3.3 70B) |
+| Embeddings | HuggingFace `all-MiniLM-L6-v2` |
+| Vector Store | ChromaDB (in-memory) |
+| PDF Loader | PyMuPDF |
+| Framework | LangChain |
+| Frontend | Streamlit |
+
+## Run Locally
+
+**1. Clone the repo**
+```bash
+git clone https://github.com/dpkbhatt863/ResearcherAG.git
+cd ResearcherAG
+```
+
+**2. Create a virtual environment and install dependencies**
+```bash
+python -m venv venv
+venv\Scripts\activate      # Windows
+source venv/bin/activate   # Mac/Linux
+
+pip install -r requirements.txt
+```
+
+**3. Add your Groq API key**
+
+Create a `.env` file in the root:
+```
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+Get a free key at [console.groq.com](https://console.groq.com)
+
+**4. Run the app**
+```bash
+streamlit run main.py
+```
+
+## Project Structure
+
+```
+ResearcherRag/
+├── main.py              # Streamlit app
+├── src/
+│   ├── loader.py        # PDF loading and chunking
+│   ├── vectorstore.py   # Embeddings and ChromaDB
+│   └── rag.py           # Groq RAG chain
+├── data/                # Sample research papers
+├── notebooks/           # Exploration notebooks
+├── requirements.txt
+└── .env                 # API keys (not committed)
+```
+
+## Deployment
+
+Deployed on **Streamlit Community Cloud** — [Live Demo](#) <!-- Replace with your deployed URL -->
