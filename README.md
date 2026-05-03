@@ -6,7 +6,8 @@ An AI-powered research assistant that lets you upload multiple research papers (
 
 ## Screenshot
 
-<!-- Add screenshot here after deployment -->
+<img width="1805" height="830" alt="image" src="https://github.com/user-attachments/assets/e3fdd8ea-14f1-4144-8913-982e521d8931" />
+
 
 ---
 
