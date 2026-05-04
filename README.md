@@ -8,7 +8,6 @@ An AI-powered research assistant that lets you upload multiple research papers (
 
 <img width="1805" height="830" alt="image" src="https://github.com/user-attachments/assets/e3fdd8ea-14f1-4144-8913-982e521d8931" />
 
-
 ---
 
 ## How It Works
@@ -16,7 +15,7 @@ An AI-powered research assistant that lets you upload multiple research papers (
 ```
 Upload PDFs → Chunk text → Embed with HuggingFace → Store in ChromaDB
                                                               ↓
-                                          Ask a question → Retrieve relevant chunks
+                                          Ask a question → Multi-Query Retrieval
                                                               ↓
                                                     Groq LLaMA answers with sources
 ```
@@ -25,8 +24,10 @@ Upload PDFs → Chunk text → Embed with HuggingFace → Store in ChromaDB
 
 - Upload one or multiple research papers at once
 - Ask natural language questions across all uploaded papers
-- Answers include which paper(s) the information came from
-- Chat history persists within the session
+- **Multi-query retrieval** — LLM rewrites your question into 3 alternative phrasings before retrieval, so semantically similar questions all find relevant content
+- Answers include which paper(s) the information came from, with page numbers and text snippets
+- **Conversation memory** — chat history is passed as context so follow-up questions work naturally
+- **Paper summaries on upload** — each paper is summarized into 3 bullet points shown in the sidebar
 - Completely free to use — no paid APIs
 
 ## Tech Stack
@@ -79,9 +80,7 @@ ResearcherRag/
 ├── src/
 │   ├── loader.py        # PDF loading and chunking
 │   ├── vectorstore.py   # Embeddings and ChromaDB
-│   └── rag.py           # Groq RAG chain
-├── data/                # Sample research papers
-├── notebooks/           # Exploration notebooks
+│   └── rag.py           # Groq RAG chain with multi-query retrieval
 ├── requirements.txt
 └── .env                 # API keys (not committed)
 ```
