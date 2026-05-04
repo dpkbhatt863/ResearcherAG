@@ -30,12 +30,16 @@ def build_rag_chain(retriever):
 
 
 def _expand_query(llm, question: str) -> list[str]:
-    prompt = f"""Generate 3 different phrasings of this question to improve document retrieval.
-Return only the 3 questions, one per line, no numbering or extra text.
+    prompt = f"""You are helping retrieve research paper content. Generate 3 alternative search queries for the question below.
+Rules:
+- Rephrase using different vocabulary (e.g. "safe" → "health benefits", "harmful effects", "risks")
+- Include both positive framing (benefits, healthy) and negative framing (risks, side effects)
+- Always include the full subject name (e.g. if user says "whey", write "whey protein")
+- Return only 3 lines, no numbering, no extra text
 
-Original question: {question}
+Question: {question}
 
-Alternative phrasings:"""
+Alternative queries:"""
     response = llm.invoke(prompt)
     variants = [q.strip() for q in response.content.strip().split("\n") if q.strip()]
     return [question] + variants[:3]

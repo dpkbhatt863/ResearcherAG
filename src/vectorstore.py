@@ -10,7 +10,7 @@ def build_vectorstore(chunks):
     return vectorstore
 
 
-def get_retriever(vectorstore, k=5):
+def get_retriever(vectorstore, k=8):
     # This converts the vectorstore into a retriever
     # k=5 means: return the 5 most similar chunks for any query
     return vectorstore.as_retriever(search_kwargs={"k": k})
